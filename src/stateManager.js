@@ -117,6 +117,10 @@ class StateManager {
             stepFunction.addExecutionDurationMetric(lastMeasuredExecutionDuration);
             stepFunction.addNetworkLatencyMetric(lastNetworkLatencyToNextStep);
             let functionInstance = stepFunction.getInstance(instanceUuid);
+            if (functionInstance === null) {// fallback: should not happen:
+                functionInstance = new Instance(coldExecution.initTime, instanceUuid);
+                stepFunction.addInstance(functionInstance);
+            }
             functionInstance.setStateBusy();
         }
 
