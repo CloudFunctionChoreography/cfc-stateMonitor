@@ -12,7 +12,7 @@ class StepExecution {
         this.stepExecutionUuid = stepExecutionUuid;
         this.instanceUuid = instanceUuid;
         this.receiveTime = receiveTime;
-        this.coldExecution = coldExecution;
+        this.coldExecution = !!(coldExecution && coldExecution.wasCold);
         this.state = StateEnum.PENDING;
     }
 
