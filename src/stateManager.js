@@ -93,7 +93,7 @@ class StateManager {
 
     addStepExecution(workflowName: string,
                      stepName: string,
-                     workflowUuid,
+                     workflowExecutionUuid,
                      stepExecutionUuid,
                      instanceUuid,
                      receiveTime,
@@ -103,7 +103,7 @@ class StateManager {
         let workflow = this.getWorkflow(workflowName);
         let functionName = workflow.workflow.workflow[stepName].functionEndpoint.functionName;
         let stepFunction = this.getFunction(functionName);
-        let newStepExecution = new StepExecution(workflowName, functionName, workflowUuid, stepExecutionUuid, instanceUuid,
+        let newStepExecution = new StepExecution(workflowName, functionName, workflowExecutionUuid, stepExecutionUuid, instanceUuid,
             receiveTime, coldExecution);
 
 
@@ -121,7 +121,7 @@ class StateManager {
         }
 
         this.pendingExecutions.forEach((pendingExecution, index) => {
-            if (pendingExecution.workflowUuid === newStepExecution.workflowUuid) {
+            if (pendingExecution.workflowExecutionUuid === newStepExecution.workflowExecutionUuid) {
                 pendingExecution.setStateDone();
                 stepFunction.getInstance(pendingExecution.instanceUuid).setStateIdle();
                 this.finishedExecutions.push(pendingExecution);

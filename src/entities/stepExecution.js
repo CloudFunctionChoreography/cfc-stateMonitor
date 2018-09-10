@@ -4,11 +4,11 @@ const StateEnum = {
 };
 
 class StepExecution {
-    constructor(workflowName, functionName, workflowUuid, stepExecutionUuid, instanceUuid,
+    constructor(workflowName, functionName, workflowExecutionUuid, stepExecutionUuid, instanceUuid,
                 receiveTime, coldExecution) {
         this.workflowName = workflowName;
         this.functionName = functionName;
-        this.workflowUuid = workflowUuid;
+        this.workflowExecutionUuid = workflowExecutionUuid;
         this.stepExecutionUuid = stepExecutionUuid;
         this.instanceUuid = instanceUuid;
         this.receiveTime = receiveTime;

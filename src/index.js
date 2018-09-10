@@ -13,14 +13,14 @@ app.post('/stepExecution', (req, res) => {
     let workflowName = req.body.workflowName
     let stepName = req.body.stepName
     let coldExecution = req.body.coldExecution
-    let workflowUuid = req.body.workflowUuid
+    let workflowExecutionUuid = req.body.workflowExecutionUuid
     let stepExecutionUuid = req.body.stepExecutionUuid
     let instanceUuid = req.body.instanceUuid
     let receiveTime = req.body.receiveTime
     let lastExecutionDuration = req.body.lastExecutionDuration
     let lastNetworkLatencyToNextStep = req.body.lastNetworkLatencyToNextStep
 
-    stateManager.addStepExecution(workflowName, stepName, workflowUuid, stepExecutionUuid,
+    stateManager.addStepExecution(workflowName, stepName, workflowExecutionUuid, stepExecutionUuid,
         instanceUuid, receiveTime, lastExecutionDuration, lastNetworkLatencyToNextStep, coldExecution);
 
 
