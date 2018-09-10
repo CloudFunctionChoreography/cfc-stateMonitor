@@ -1,0 +1,170 @@
+{
+  "workflows": [
+    {
+      "name": "sample-workflow1",
+      "description": "A sample workflow...",
+      "startAt": "step1",
+      "workflow": {
+        "step1": {
+          "type": "ChoiceTask",
+          "ordinalNumber": 1,
+          "provider": "openWhisk",
+          "functionEndpoint": {
+            "functionName": "action1Handler"
+          },
+          "inputPath": "step1InputParameterKey",
+          "resultPath": "step1ResultParameterKey",
+          "choices": [
+            {
+              "variable": "success",
+              "choiceType": "stringEquals",
+              "condition": "true",
+              "next": "step2"
+            },
+            {
+              "variable": "success",
+              "choiceType": "stringEquals",
+              "condition": "false",
+              "next": "abort"
+            }
+          ],
+          "default": "abort"
+        },
+        "step2": {
+          "type": "ChoiceTask",
+          "provider": "aws",
+          "ordinalNumber": 2,
+          "functionEndpoint": {
+            "functionName": "function1Handler",
+            "type": "post",
+            "hostname": "taz2v7zn86.execute-api.us-east-1.amazonaws.com",
+            "path": "/dev/api/function1"
+          },
+          "inputPath": "step2InputParameterKey",
+          "resultPath": "step2ResultParameterKey",
+          "choices": [
+            {
+              "variable": "success",
+              "choiceType": "stringEquals",
+              "condition": "true",
+              "next": "step3"
+            },
+            {
+              "variable": "success",
+              "choiceType": "stringEquals",
+              "condition": "false",
+              "next": "abort"
+            }
+          ],
+          "default": "abort"
+        },
+        "step3": {
+          "type": "Task",
+          "ordinalNumber": 3,
+          "provider": "aws",
+          "functionEndpoint": {
+            "functionName": "function2Handler",
+            "type": "post",
+            "hostname": "taz2v7zn86.execute-api.us-east-1.amazonaws.com",
+            "path": "/dev/api/function2"
+          },
+          "inputPath": "step3InputParameterKey",
+          "resultPath": "step3ResultParameterKey",
+          "next": "step4"
+        },
+        "step4": {
+          "type": "Task",
+          "ordinalNumber": 4,
+          "provider": "aws",
+          "functionEndpoint": {
+            "functionName": "function3Handler",
+            "type": "post",
+            "hostname": "taz2v7zn86.execute-api.us-east-1.amazonaws.com",
+            "path": "/dev/api/function3"
+          },
+          "inputPath": "step4InputParameterKey",
+          "resultPath": "step4ResultParameterKey",
+          "next": "step5"
+        },
+        "step5": {
+          "type": "Task",
+          "ordinalNumber": 5,
+          "provider": "aws",
+          "functionEndpoint": {
+            "functionName": "function4Handler",
+            "type": "post",
+            "hostname": "taz2v7zn86.execute-api.us-east-1.amazonaws.com",
+            "path": "/dev/api/function4"
+          },
+          "inputPath": "step5InputParameterKey",
+          "resultPath": "step5ResultParameterKey",
+          "next": "step6"
+        },
+        "step6": {
+          "type": "Task",
+          "ordinalNumber": 6,
+          "provider": "openWhisk",
+          "functionEndpoint": {
+            "functionName": "action2Handler",
+            "type": "post",
+            "hostname": "openwhisk.eu-gb.bluemix.net",
+            "path": "/api/v1/namespaces/simon.buchholz@campus.tu-berlin.de_dev/actions/action2Handler"
+          },
+          "inputPath": "step6InputParameterKey",
+          "resultPath": "step6ResultParameterKey",
+          "next": "step7"
+        },
+        "step7": {
+          "type": "Task",
+          "ordinalNumber": 7,
+          "provider": "openWhisk",
+          "functionEndpoint": {
+            "functionName": "action3Handler",
+            "type": "post",
+            "hostname": "openwhisk.eu-gb.bluemix.net",
+            "path": "/api/v1/namespaces/simon.buchholz@campus.tu-berlin.de_dev/actions/action3Handler"
+          },
+          "inputPath": "step7InputParameterKey",
+          "resultPath": "step7ResultParameterKey",
+          "next": "step8"
+        },
+        "step8": {
+          "type": "Task",
+          "ordinalNumber": 8,
+          "provider": "openWhisk",
+          "functionEndpoint": {
+            "functionName": "action4Handler",
+            "type": "post",
+            "hostname": "openwhisk.eu-gb.bluemix.net",
+            "path": "/api/v1/namespaces/simon.buchholz@campus.tu-berlin.de_dev/actions/action4Handler"
+          },
+          "inputPath": "step8InputParameterKey",
+          "resultPath": "step8ResultParameterKey",
+          "end": "true",
+          "finishQueue": {
+            "provider": "AWS-SQS",
+            "queueUrl": "https://sqs.us-east-2.amazonaws.com/520443335433/workflowDone",
+            "regionName": "us-east-1",
+            "delaySeconds": 120
+          }
+        },
+        "abort": {
+          "type": "Fail",
+          "ordinalNumber": 9,
+          "provider": "openWhisk",
+          "functionEndpoint": {
+            "functionName": "action5Handler",
+            "type": "post",
+            "hostname": "openwhisk.eu-gb.bluemix.net",
+            "path": "/api/v1/namespaces/simon.buchholz@campus.tu-berlin.de_dev/actions/action5Handler",
+            "requireWhiskAuth": "123"
+          },
+          "cause": "TODO in workflow json",
+          "inputPath": "abortVariable",
+          "resultPath": "abortResult",
+          "error": "Wrokflow returned abort"
+        }
+      }
+    }
+  ]
+}

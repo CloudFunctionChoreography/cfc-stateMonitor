@@ -1,0 +1,24 @@
+{
+  "name": "cfc-hinter",
+  "version": "1.0.0",
+  "description": "This is a dedicated express.js server which receives reports from each step execution and dynamically decides on hint masseges to functions. This way we pre-heat functions before they are even requested.",
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "babel src/ -d lib/",
+    "prepublish": "npm run build",
+    "prestart": "babel src/ -d lib/",
+    "start": "node lib/index.js",
+    "flow": "flow"
+  },
+  "author": "Simon Buchholz",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-flow": "^6.23.0",
+    "flow-bin": "^0.80.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3"
+  }
+}
