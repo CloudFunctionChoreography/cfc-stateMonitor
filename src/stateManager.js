@@ -107,7 +107,7 @@ class StateManager {
             receiveTime, coldExecution);
 
 
-        if (coldExecution.wasCold) {
+        if (coldExecution && coldExecution.wasCold) {
             stepFunction.addInitTimeMetric(coldExecution.initTime);
             // instance does not exist yet: add instance
             let newFunctionInstance = new Instance(coldExecution.initTime, instanceUuid);
