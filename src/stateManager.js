@@ -123,7 +123,7 @@ class StateManager {
         this.pendingExecutions.forEach((pendingExecution, index) => {
             if (pendingExecution.workflowExecutionUuid === newStepExecution.workflowExecutionUuid) {
                 pendingExecution.setStateDone();
-                stepFunction.getInstance(pendingExecution.instanceUuid).setStateIdle();
+                this.getFunction(pendingExecution.functionName).getInstance(pendingExecution.instanceUuid).setStateIdle();
                 this.finishedExecutions.push(pendingExecution);
                 this.pendingExecutions.splice(index, 1);
             }

@@ -21,6 +21,10 @@ class StepFunction {
     }
 
     toString() {
+        let warmInstancesStr = [];
+        this.warmInstances.forEach(instance => {
+            warmInstancesStr.push(instance.instanceUuid)
+        });
         let assignedWorkflowsStr = [];
         this.assignedWorkflows.forEach(workflow => {
             assignedWorkflowsStr.push(workflow.name)
@@ -29,7 +33,8 @@ class StepFunction {
             name: this.name,
             provider: this.provider,
             assignedWorkflows: assignedWorkflowsStr,
-            averageMetrics: this.getMetricsAvg()
+            averageMetrics: this.getMetricsAvg(),
+            warmInstances: warmInstancesStr
         })
     }
 
@@ -56,7 +61,7 @@ class StepFunction {
             this.metrics.executionDurations.forEach(value => {
                 avgExecutionDuration = avgExecutionDuration + value
             });
-            avgExecutionDuration = avgExecutionDuration/this.metrics.executionDurations.length;
+            avgExecutionDuration = avgExecutionDuration / this.metrics.executionDurations.length;
         }
 
         let avgNetworkLatency = -1;
@@ -65,7 +70,7 @@ class StepFunction {
             this.metrics.networkLatencies.forEach(value => {
                 avgNetworkLatency = avgNetworkLatency + value
             });
-            avgNetworkLatency = avgNetworkLatency/this.metrics.networkLatencies.length;
+            avgNetworkLatency = avgNetworkLatency / this.metrics.networkLatencies.length;
         }
 
         let avgInitTime = -1;
@@ -74,7 +79,7 @@ class StepFunction {
             this.metrics.initTimes.forEach(value => {
                 avgInitTime = avgInitTime + value
             });
-            avgInitTime = avgInitTime/this.metrics.initTimes.length;
+            avgInitTime = avgInitTime / this.metrics.initTimes.length;
         }
 
         return {avgInitTime, avgExecutionDuration, avgNetworkLatency}
