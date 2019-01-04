@@ -5,22 +5,21 @@ const StateEnum = {
 
 class Instance {
 
-    constructor(initTime, instanceUuid) {
-        this.initTime = initTime;
+    constructor(instanceUuid) {
         this.instanceUuid = instanceUuid;
-        this.state = StateEnum.IDLE
+        this.state = StateEnum.IDLE;
     }
 
-    setStateBusy () {
-        this.state = StateEnum.BUSY
+    setStateBusy() {
+        this.state = StateEnum.BUSY;
     }
 
-    setStateIdle () {
-        this.state = StateEnum.IDLE
+    setStateIdle() {
+        this.state = StateEnum.IDLE;
     }
 
     toString() {
-        return JSON.stringify(this)
+        return JSON.stringify(this);
     }
 }
 

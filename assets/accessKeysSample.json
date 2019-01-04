@@ -1,0 +1,10 @@
+{
+  "openWhisk": {
+    "owApiAuthKey": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    "owApiAuthPassword": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+  },
+  "awsLambda": {
+    "accessKeyId": "xxxxxxxxxxxxxxxxxxxx",
+    "secretAccessKey": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+  }
+}

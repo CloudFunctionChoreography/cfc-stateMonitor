@@ -7,10 +7,9 @@
       "workflow": {
         "step1": {
           "type": "ChoiceTask",
-          "ordinalNumber": 1,
-          "provider": "openWhisk",
+          "provider": "aws",
           "functionEndpoint": {
-            "functionName": "action1Handler"
+            "functionName": "function1Handler"
           },
           "inputPath": "step1InputParameterKey",
           "resultPath": "step1ResultParameterKey",
@@ -31,42 +30,26 @@
           "default": "abort"
         },
         "step2": {
-          "type": "ChoiceTask",
-          "provider": "aws",
-          "ordinalNumber": 2,
-          "functionEndpoint": {
-            "functionName": "function1Handler",
-            "type": "post",
-            "hostname": "taz2v7zn86.execute-api.us-east-1.amazonaws.com",
-            "path": "/dev/api/function1"
-          },
-          "inputPath": "step2InputParameterKey",
-          "resultPath": "step2ResultParameterKey",
-          "choices": [
-            {
-              "variable": "success",
-              "choiceType": "stringEquals",
-              "condition": "true",
-              "next": "step3"
-            },
-            {
-              "variable": "success",
-              "choiceType": "stringEquals",
-              "condition": "false",
-              "next": "abort"
-            }
-          ],
-          "default": "abort"
-        },
-        "step3": {
           "type": "Task",
-          "ordinalNumber": 3,
           "provider": "aws",
           "functionEndpoint": {
             "functionName": "function2Handler",
             "type": "post",
-            "hostname": "taz2v7zn86.execute-api.us-east-1.amazonaws.com",
-            "path": "/dev/api/function2"
+            "hostname": "8c0wbbgo47.execute-api.us-east-1.amazonaws.com",
+            "path": "/dev/api/awssixteenstepsfunction2"
+          },
+          "inputPath": "step2InputParameterKey",
+          "resultPath": "step2ResultParameterKey",
+          "next": "step3"
+        },
+        "step3": {
+          "type": "Task",
+          "provider": "aws",
+          "functionEndpoint": {
+            "functionName": "function3Handler",
+            "type": "post",
+            "hostname": "8c0wbbgo47.execute-api.us-east-1.amazonaws.com",
+            "path": "/dev/api/awssixteenstepsfunction3"
           },
           "inputPath": "step3InputParameterKey",
           "resultPath": "step3ResultParameterKey",
@@ -74,13 +57,12 @@
         },
         "step4": {
           "type": "Task",
-          "ordinalNumber": 4,
           "provider": "aws",
           "functionEndpoint": {
-            "functionName": "function3Handler",
+            "functionName": "function4Handler",
             "type": "post",
-            "hostname": "taz2v7zn86.execute-api.us-east-1.amazonaws.com",
-            "path": "/dev/api/function3"
+            "hostname": "8c0wbbgo47.execute-api.us-east-1.amazonaws.com",
+            "path": "/dev/api/awssixteenstepsfunction4"
           },
           "inputPath": "step4InputParameterKey",
           "resultPath": "step4ResultParameterKey",
@@ -88,13 +70,12 @@
         },
         "step5": {
           "type": "Task",
-          "ordinalNumber": 5,
           "provider": "aws",
           "functionEndpoint": {
-            "functionName": "function4Handler",
+            "functionName": "function5Handler",
             "type": "post",
-            "hostname": "taz2v7zn86.execute-api.us-east-1.amazonaws.com",
-            "path": "/dev/api/function4"
+            "hostname": "8c0wbbgo47.execute-api.us-east-1.amazonaws.com",
+            "path": "/dev/api/awssixteenstepsfunction5"
           },
           "inputPath": "step5InputParameterKey",
           "resultPath": "step5ResultParameterKey",
@@ -102,13 +83,12 @@
         },
         "step6": {
           "type": "Task",
-          "ordinalNumber": 6,
-          "provider": "openWhisk",
+          "provider": "aws",
           "functionEndpoint": {
-            "functionName": "action2Handler",
+            "functionName": "function6Handler",
             "type": "post",
-            "hostname": "openwhisk.eu-gb.bluemix.net",
-            "path": "/api/v1/namespaces/simon.buchholz@campus.tu-berlin.de_dev/actions/action2Handler"
+            "hostname": "8c0wbbgo47.execute-api.us-east-1.amazonaws.com",
+            "path": "/dev/api/awssixteenstepsfunction6"
           },
           "inputPath": "step6InputParameterKey",
           "resultPath": "step6ResultParameterKey",
@@ -116,13 +96,12 @@
         },
         "step7": {
           "type": "Task",
-          "ordinalNumber": 7,
-          "provider": "openWhisk",
+          "provider": "aws",
           "functionEndpoint": {
-            "functionName": "action3Handler",
+            "functionName": "function7Handler",
             "type": "post",
-            "hostname": "openwhisk.eu-gb.bluemix.net",
-            "path": "/api/v1/namespaces/simon.buchholz@campus.tu-berlin.de_dev/actions/action3Handler"
+            "hostname": "8c0wbbgo47.execute-api.us-east-1.amazonaws.com",
+            "path": "/dev/api/awssixteenstepsfunction7"
           },
           "inputPath": "step7InputParameterKey",
           "resultPath": "step7ResultParameterKey",
@@ -130,39 +109,134 @@
         },
         "step8": {
           "type": "Task",
-          "ordinalNumber": 8,
-          "provider": "openWhisk",
+          "provider": "aws",
           "functionEndpoint": {
-            "functionName": "action4Handler",
+            "functionName": "function8Handler",
             "type": "post",
-            "hostname": "openwhisk.eu-gb.bluemix.net",
-            "path": "/api/v1/namespaces/simon.buchholz@campus.tu-berlin.de_dev/actions/action4Handler"
+            "hostname": "8c0wbbgo47.execute-api.us-east-1.amazonaws.com",
+            "path": "/dev/api/awssixteenstepsfunction8"
           },
           "inputPath": "step8InputParameterKey",
           "resultPath": "step8ResultParameterKey",
-          "end": "true",
-          "finishQueue": {
-            "provider": "AWS-SQS",
-            "queueUrl": "https://sqs.us-east-2.amazonaws.com/520443335433/workflowDone",
-            "regionName": "us-east-1",
-            "delaySeconds": 120
-          }
+          "next": "step9"
+        },
+        "step9": {
+          "type": "Task",
+          "provider": "aws",
+          "functionEndpoint": {
+            "functionName": "function9Handler",
+            "type": "post",
+            "hostname": "8c0wbbgo47.execute-api.us-east-1.amazonaws.com",
+            "path": "/dev/api/awssixteenstepsfunction9"
+          },
+          "inputPath": "step9InputParameterKey",
+          "resultPath": "step9ResultParameterKey",
+          "next": "step10"
+        },
+        "step10": {
+          "type": "Task",
+          "provider": "aws",
+          "functionEndpoint": {
+            "functionName": "function10Handler",
+            "type": "post",
+            "hostname": "8c0wbbgo47.execute-api.us-east-1.amazonaws.com",
+            "path": "/dev/api/awssixteenstepsfunction10"
+          },
+          "inputPath": "step10InputParameterKey",
+          "resultPath": "step10ResultParameterKey",
+          "next": "step11"
+        },
+        "step11": {
+          "type": "Task",
+          "provider": "aws",
+          "functionEndpoint": {
+            "functionName": "function11Handler",
+            "type": "post",
+            "hostname": "8c0wbbgo47.execute-api.us-east-1.amazonaws.com",
+            "path": "/dev/api/awssixteenstepsfunction11"
+          },
+          "inputPath": "step11InputParameterKey",
+          "resultPath": "step11ResultParameterKey",
+          "next": "step12"
+        },
+        "step12": {
+          "type": "Task",
+          "provider": "aws",
+          "functionEndpoint": {
+            "functionName": "function12Handler",
+            "type": "post",
+            "hostname": "8c0wbbgo47.execute-api.us-east-1.amazonaws.com",
+            "path": "/dev/api/awssixteenstepsfunction12"
+          },
+          "inputPath": "step12InputParameterKey",
+          "resultPath": "step12ResultParameterKey",
+          "next": "step13"
+        },
+        "step13": {
+          "type": "Task",
+          "provider": "aws",
+          "functionEndpoint": {
+            "functionName": "function13Handler",
+            "type": "post",
+            "hostname": "8c0wbbgo47.execute-api.us-east-1.amazonaws.com",
+            "path": "/dev/api/awssixteenstepsfunction13"
+          },
+          "inputPath": "step13InputParameterKey",
+          "resultPath": "step13ResultParameterKey",
+          "next": "step14"
+        },
+        "step14": {
+          "type": "Task",
+          "provider": "aws",
+          "functionEndpoint": {
+            "functionName": "function14Handler",
+            "type": "post",
+            "hostname": "8c0wbbgo47.execute-api.us-east-1.amazonaws.com",
+            "path": "/dev/api/awssixteenstepsfunction14"
+          },
+          "inputPath": "step14InputParameterKey",
+          "resultPath": "step14ResultParameterKey",
+          "next": "step15"
+        },
+        "step15": {
+          "type": "Task",
+          "provider": "aws",
+          "functionEndpoint": {
+            "functionName": "function15Handler",
+            "type": "post",
+            "hostname": "8c0wbbgo47.execute-api.us-east-1.amazonaws.com",
+            "path": "/dev/api/awssixteenstepsfunction15"
+          },
+          "inputPath": "step15InputParameterKey",
+          "resultPath": "step15ResultParameterKey",
+          "next": "step16"
+        },
+        "step16": {
+          "type": "Task",
+          "provider": "aws",
+          "functionEndpoint": {
+            "functionName": "function16Handler",
+            "type": "post",
+            "hostname": "8c0wbbgo47.execute-api.us-east-1.amazonaws.com",
+            "path": "/dev/api/awssixteenstepsfunction16"
+          },
+          "inputPath": "step16InputParameterKey",
+          "resultPath": "step16ResultParameterKey",
+          "end": "true"
         },
         "abort": {
           "type": "Fail",
-          "ordinalNumber": 9,
-          "provider": "openWhisk",
+          "provider": "aws",
           "functionEndpoint": {
-            "functionName": "action5Handler",
+            "functionName": "function17Handler",
             "type": "post",
-            "hostname": "openwhisk.eu-gb.bluemix.net",
-            "path": "/api/v1/namespaces/simon.buchholz@campus.tu-berlin.de_dev/actions/action5Handler",
-            "requireWhiskAuth": "123"
+            "hostname": "8c0wbbgo47.execute-api.us-east-1.amazonaws.com",
+            "path": "/dev/api/awssixteenstepsfunction17"
           },
           "cause": "TODO in workflow json",
           "inputPath": "abortVariable",
           "resultPath": "abortResult",
-          "error": "Wrokflow returned abort"
+          "error": "Workflow returned abort"
         }
       }
     }

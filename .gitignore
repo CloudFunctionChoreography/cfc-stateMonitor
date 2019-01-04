@@ -1,6 +1,7 @@
 # IDE
 .idea
 
+assets/accessKeys.json
 # Logs
 logs
 *.log

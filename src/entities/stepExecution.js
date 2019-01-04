@@ -4,28 +4,28 @@ const StateEnum = {
 };
 
 class StepExecution {
-    constructor(workflowName, functionName, workflowExecutionUuid, stepExecutionUuid, instanceUuid,
-                receiveTime, coldExecution) {
+    constructor(workflowName, functionName, workflowExecutionUuid, stepExecutionUuid, instanceUuid, coldExecution, startTime, stepName) {
         this.workflowName = workflowName;
         this.functionName = functionName;
         this.workflowExecutionUuid = workflowExecutionUuid;
         this.stepExecutionUuid = stepExecutionUuid;
         this.instanceUuid = instanceUuid;
-        this.receiveTime = receiveTime;
         this.coldExecution = !!(coldExecution && coldExecution.wasCold);
         this.state = StateEnum.PENDING;
+        this.startTime = startTime;
+        this.stepName = stepName;
     }
 
     setStatePending() {
-        this.state = StateEnum.PENDING
+        this.state = StateEnum.PENDING;
     }
 
     setStateDone() {
-        this.state = StateEnum.DONE
+        this.state = StateEnum.DONE;
     }
 
     toString() {
-        return JSON.stringify(this)
+        return JSON.stringify(this);
     }
 }
 
